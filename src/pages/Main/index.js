@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { FaPlus, FaGithubAlt } from 'react-icons/fa';
-import { Container, Form, SubmitButton } from './styles';
+import { FaPlus, FaGithubAlt, FaSpinner } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { Container, Form, SubmitButton, List } from './styles';
 import api from '../../services/api';
 
 export default class Main extends Component {
@@ -9,6 +10,22 @@ export default class Main extends Component {
     repositories: [],
     loading: false,
   };
+
+  componentDidMount() {
+    const repositories = localStorage.getItem('repositories');
+
+    if (repositories) {
+      this.setState({ repositories: JSON.parse(repositories) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { repositories } = this.state;
+
+    if (prevState.repositories !== repositories) {
+      localStorage.setItem('repositories', JSON.stringify(repositories));
+    }
+  }
 
   handleInputChange = e => {
     this.setState({ newRepo: e.target.value });
@@ -35,7 +52,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { newRepo } = this.state;
+    const { newRepo, loading, repositories } = this.state;
     return (
       <Container>
         <h1>
@@ -50,10 +67,25 @@ export default class Main extends Component {
             value={newRepo}
             onChange={this.handleInputChange}
           />
-          <SubmitButton>
-            <FaPlus color="#FFF" size={14} />
+          <SubmitButton loading={loading}>
+            {loading ? (
+              <FaSpinner color="#FFF" size={14} />
+            ) : (
+              <FaPlus color="#FFF" size={14} />
+            )}
           </SubmitButton>
         </Form>
+
+        <List>
+          {repositories.map(repository => (
+            <li key={repository.name}>
+              <span>{repository.name}</span>
+              <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
+                Details
+              </Link>
+            </li>
+          ))}
+        </List>
       </Container>
     );
   }
