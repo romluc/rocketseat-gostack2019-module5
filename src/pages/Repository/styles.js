@@ -11,10 +11,17 @@ export const Loading = styled.div`
   height: 100vh;
 `;
 
+export const OwnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const Owner = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eee;
 
   a {
     color: #008b8b;
@@ -43,10 +50,20 @@ export const Owner = styled.header`
   }
 `;
 
+export const IssueListContainer = styled.div`
+  display: flex;
+  overflow-y: scroll;
+  border-width: 2px;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+  }
+`;
+
 export const IssueList = styled.ul`
-  padding-top: 30px;
-  margin-top: 30px;
-  border-top: 1px solid #eee;
+  padding: 15px 5px 0;
+  margin-top: 10px;
   list-style: none;
 
   li {

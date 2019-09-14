@@ -85,7 +85,7 @@ export const ClearButton = styled.button`
   padding: 0 15px;
   border-radius: 4px;
   height: 40px;
-  box-shadow: 3px 3px 5px #777;
+  box-shadow: 0 0 5px #777;
 `;
 
 export const ClearButtonText = styled.text`
