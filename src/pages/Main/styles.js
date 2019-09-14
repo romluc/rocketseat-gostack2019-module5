@@ -68,8 +68,27 @@ export const List = styled.ul`
     border-top: 1px solid #eee;
   }
 
+  li:last-child {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
   a {
     color: #008b8b;
     text-decoration: none;
   }
+`;
+
+export const ClearButton = styled.button`
+  background: #00688b;
+  border: 0;
+  padding: 0 15px;
+  border-radius: 4px;
+  height: 40px;
+  box-shadow: 3px 3px 5px #777;
+`;
+
+export const ClearButtonText = styled.text`
+  color: #fff;
+  font-weight: bold;
 `;

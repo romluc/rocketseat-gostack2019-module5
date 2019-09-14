@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { FaPlus, FaGithubAlt, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Form, SubmitButton, List } from './styles';
+import { toast } from 'react-toastify';
+import {
+  Form,
+  SubmitButton,
+  List,
+  ClearButton,
+  ClearButtonText,
+} from './styles';
 import Container from '../../components/Container';
 import api from '../../services/api';
 
@@ -39,16 +46,38 @@ export default class Main extends Component {
 
     const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`);
+    if (!newRepo) {
+      this.setState({ loading: false });
+      return;
+    }
 
-    const data = {
-      name: response.data.full_name,
-    };
+    try {
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        loading: false,
+      });
+    } catch (err) {
+      toast.error('Repo not found', { autoClose: 2000 });
+      this.setState({
+        repositories: [...repositories],
+        newRepo: '',
+        loading: false,
+      });
+    }
+  };
+
+  handleClick = () => {
+    localStorage.clear();
 
     this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
+      repositories: [],
     });
   };
 
@@ -87,6 +116,9 @@ export default class Main extends Component {
             </li>
           ))}
         </List>
+        <ClearButton onClick={this.handleClick}>
+          <ClearButtonText>Clear List</ClearButtonText>
+        </ClearButton>
       </Container>
     );
   }
