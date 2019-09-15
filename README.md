@@ -11,5 +11,9 @@
 - Scrolling in the repos list with fixed header, enhancing UI/UX 
 
 ### Snapshots 
-![gostack-module5-1](https://user-images.githubusercontent.com/44209758/64021005-6029b100-cb09-11e9-8659-5b539e5f24ee.png)
-![gostack-module5-2](https://user-images.githubusercontent.com/44209758/64021007-61f37480-cb09-11e9-84ac-325fabffefe0.png)
+![gostack-modulo5](https://user-images.githubusercontent.com/44209758/64926930-12d06380-d7da-11e9-8663-22ed711e2a34.png)
+
+![gostack-modulo5-3](https://user-images.githubusercontent.com/44209758/64926977-bde11d00-d7da-11e9-8317-0b8d2ef53459.png)
+
+![gostack-modulo5-2](https://user-images.githubusercontent.com/44209758/64926940-4d3a0080-d7da-11e9-8f13-1ae438c2b1cd.png)
+
