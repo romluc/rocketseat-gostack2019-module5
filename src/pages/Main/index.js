@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { FaPlus, FaGithubAlt, FaSpinner } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   Form,
   SubmitButton,
   List,
+  DetailsButton,
   ClearButton,
-  ClearButtonText,
+  RemoveButton,
 } from './styles';
 import Container from '../../components/Container';
 import api from '../../services/api';
@@ -73,12 +73,21 @@ export default class Main extends Component {
     }
   };
 
-  handleClick = () => {
+  handleClear = () => {
     localStorage.clear();
 
     this.setState({
       repositories: [],
     });
+  };
+
+  handleRemove = repository => {
+    const { repositories } = this.state;
+    const filteredArray = repositories.filter(arrayItem => {
+      return arrayItem !== repository;
+    });
+    this.setState({ repositories: [...filteredArray] });
+    localStorage.setItem('repositories', JSON.stringify(repositories));
   };
 
   render() {
@@ -110,15 +119,26 @@ export default class Main extends Component {
           {repositories.map(repository => (
             <li key={repository.name}>
               <span>{repository.name}</span>
-              <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
-                Details
-              </Link>
+              <div>
+                <DetailsButton>
+                  <a
+                    href={`/repository/${encodeURIComponent(repository.name)}`}
+                  >
+                    Details
+                  </a>
+                </DetailsButton>
+                <RemoveButton
+                  onClick={() => {
+                    this.handleRemove(repository);
+                  }}
+                >
+                  Remove
+                </RemoveButton>
+              </div>
             </li>
           ))}
         </List>
-        <ClearButton onClick={this.handleClick}>
-          <ClearButtonText>Clear List</ClearButtonText>
-        </ClearButton>
+        <ClearButton onClick={this.handleClear}>Clear List</ClearButton>
       </Container>
     );
   }

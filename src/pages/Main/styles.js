@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { darken, lighten } from 'polished';
 
 export const Form = styled.form`
   margin-top: 30px;
@@ -37,6 +38,11 @@ export const SubmitButton = styled.button.attrs(props => ({
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${lighten(0.05, '#00688b')};
+  }
 
   &[disabled] {
     cursor: not-allowed;
@@ -59,9 +65,17 @@ export const List = styled.ul`
   li {
     padding: 15px 0;
     display: flex;
+    font-size: 18px;
+    color: #333;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    div {
+      display: flex;
+      align-content: center;
+      justify-content: space-between;
+    }
   }
 
   & + li {
@@ -72,10 +86,44 @@ export const List = styled.ul`
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
   }
+`;
+
+export const DetailsButton = styled.button`
+  display: inline-block;
+  align-content: center;
+  background: #00688b;
+  border: 0;
+  padding: 0 15px;
+  border-radius: 4px;
+  height: 40px;
+  box-shadow: 0 0 5px #777;
+  transition: background 0.2s;
 
   a {
-    color: #008b8b;
+    color: #fff;
+    font-weight: bold;
     text-decoration: none;
+  }
+
+  &:hover {
+    background: ${lighten(0.05, '#00688b')};
+  }
+`;
+
+export const RemoveButton = styled.button`
+  background: ${darken(0.3, 'tomato')};
+  border: 0;
+  padding: 0 15px;
+  border-radius: 4px;
+  height: 40px;
+  margin-left: 5px;
+  box-shadow: 0 0 5px #777;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${lighten(0.05, `${darken(0.3, 'tomato')}`)};
   }
 `;
 
@@ -84,11 +132,13 @@ export const ClearButton = styled.button`
   border: 0;
   padding: 0 15px;
   border-radius: 4px;
-  height: 40px;
+  min-height: 40px;
   box-shadow: 0 0 5px #777;
-`;
-
-export const ClearButtonText = styled.text`
   color: #fff;
   font-weight: bold;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${lighten(0.05, '#00688b')};
+  }
 `;
